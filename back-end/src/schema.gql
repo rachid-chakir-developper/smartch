@@ -1,0 +1,59 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: ID
+  firstName: String
+  lastName: String
+  email: String
+  watchListMovies: [ID!]
+  likedMovies: [ID!]
+}
+
+type LoginTypeResponse {
+  user: UserType!
+  accessToken: String
+}
+
+type MovieType {
+  id: ID
+  title: String
+  poster_path: String
+}
+
+type LikeAndWatchType {
+  likedMovies: [ID!]
+  watchListMovies: [MovieType!]
+}
+
+type ActionRespenseType {
+  done: Boolean!
+}
+
+type Query {
+  user(id: Int!): UserType!
+  users: [UserType!]!
+  movies(input: PaginatorInput!): [MovieType!]!
+  likedMovies: [ID!]!
+  likeAndWatchList: LikeAndWatchType!
+}
+
+input PaginatorInput {
+  query: String!
+  page: Int!
+}
+
+type Mutation {
+  register(input: RegisterInput!): UserType!
+  login(password: String!, email: String!): LoginTypeResponse!
+  likeThisMovie(id: ID!): ActionRespenseType!
+  addMovieToWatchList(id: ID!): ActionRespenseType!
+}
+
+input RegisterInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
